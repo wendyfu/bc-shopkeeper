@@ -1,7 +1,6 @@
 "use strict";
 
 const fetch = require("node-fetch");
-const { ITEMS } = require("./constants");
 
 async function fetchSingleItem(item) {
   return fetch(process.env.URL, {
@@ -29,7 +28,9 @@ async function fetchSingleItem(item) {
 
 async function fetchPrice() {
   let text = "";
-  return Promise.all(ITEMS.map((item) => fetchSingleItem(item))).then(
+  const decoded = JSON.parse(Buffer.from(process.env.WL, "base64").toString());
+  console.log("Watch List:", decoded);
+  return Promise.all(decoded.map((item) => fetchSingleItem(item))).then(
     (data) => {
       text = data.join("\n\n");
       return text;

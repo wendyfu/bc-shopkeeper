@@ -16,8 +16,9 @@ functions:
   shopkeeper:
     handler: handler.shopkeeper
     events:
-      - schedule: rate(15 minutes)
+      - schedule: cron(0/15 * * * ? *)
     environment:
       BOT: ${env:BOT}
       CH: ${env:CH}
       URL: ${env:URL}
+      WL: ${env:WL}
